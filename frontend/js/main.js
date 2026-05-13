@@ -17,13 +17,22 @@ function handleNavClick(event, renderFunction) {
     renderFunction();
 }
 
-function renderCombustiveis() {
+async function renderCombustiveis() {
     const content = document.getElementById('app-content');
-    content.innerHTML = `
-        <h2>Gerenciar Tipos de Combustível</h2>
-        <p>Funcionalidade em desenvolvimento...</p>
-    `;
-    // Aqui faremos fetchApi('/combustiveis') futuramente
+
+    // Busca o HTML do template
+    try {
+        const response = await fetch('pages/combustivel/template.html');
+        const html = await response.text();
+        content.innerHTML = html;
+
+        // Inicializa o controlador
+        if(window.combustivelController) {
+            window.combustivelController.init();
+        }
+    } catch(err) {
+        content.innerHTML = '<p>Erro ao carregar a página.</p>';
+    }
 }
 
 function renderBombas() {
