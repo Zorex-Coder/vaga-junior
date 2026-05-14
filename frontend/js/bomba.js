@@ -29,16 +29,8 @@ class BombaController {
 
     async loadCombustiveis() {
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // const combustiveis = await fetchApi('/combustiveis');
-
-            // Mock temporário para testar
-            const mockCombustiveis = [
-                { id: 1, nome: 'Gasolina Comum' },
-                { id: 2, nome: 'Etanol' }
-            ];
-
-            this.populateCombustiveisSelect(mockCombustiveis);
+            const combustiveis = await fetchApi('/combustiveis');
+            this.populateCombustiveisSelect(combustiveis);
         } catch (error) {
             alert('Erro ao carregar lista de combustíveis: ' + error.message);
         }
@@ -58,15 +50,8 @@ class BombaController {
 
     async loadData() {
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // const data = await fetchApi(this.endpoint);
-
-            // Mock temporário para testar a tela
-            const mockData = [
-                { id: 1, nome: 'Bomba 01', combustivelId: 1, combustivelNome: 'Gasolina Comum' },
-                { id: 2, nome: 'Bomba 02', combustivelId: 2, combustivelNome: 'Etanol' }
-            ];
-            this.renderTable(mockData);
+            const data = await fetchApi(this.endpoint);
+            this.renderTable(data);
         } catch (error) {
             alert('Erro ao carregar bombas: ' + error.message);
         }
@@ -127,13 +112,11 @@ class BombaController {
         const url = id ? `${this.endpoint}/${id}` : this.endpoint;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(url, method, payload);
-            console.log(`Simulando API -> ${method} ${url}`, payload);
+            await fetchApi(url, method, payload);
 
             this.resetForm();
             await this.loadData();
-            alert('Bomba salva com sucesso! (Simulação)');
+            alert('Bomba salva com sucesso!');
         } catch (error) {
             alert('Erro ao salvar bomba: ' + error.message);
         }
@@ -143,12 +126,10 @@ class BombaController {
         if (!confirm('Deseja realmente excluir esta bomba?')) return;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
-            console.log(`Simulando API -> DELETE ${this.endpoint}/${id}`);
+            await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
 
             await this.loadData();
-            alert('Bomba excluída com sucesso! (Simulação)');
+            alert('Bomba excluída com sucesso!');
         } catch (error) {
             alert('Erro ao excluir bomba: ' + error.message);
         }

@@ -35,16 +35,8 @@ class AbastecimentoController {
 
     async loadBombas() {
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // const bombas = await fetchApi('/bombas');
-
-            // Mock temporário para testar
-            const mockBombas = [
-                { id: 1, nome: 'Bomba 01 - Gasolina Comum' },
-                { id: 2, nome: 'Bomba 02 - Etanol' }
-            ];
-
-            this.populateBombasSelect(mockBombas);
+            const bombas = await fetchApi('/bombas');
+            this.populateBombasSelect(bombas);
         } catch (error) {
             alert('Erro ao carregar lista de bombas: ' + error.message);
         }
@@ -63,15 +55,8 @@ class AbastecimentoController {
 
     async loadData() {
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // const data = await fetchApi(this.endpoint);
-
-            // Mock temporário para testar a tela
-            const mockData = [
-                { id: 1, bombaId: 1, bombaNome: 'Bomba 01', data: '2025-07-07T10:30', litragem: 20.0, valor: 117.80 },
-                { id: 2, bombaId: 2, bombaNome: 'Bomba 02', data: '2025-07-07T11:15', litragem: 30.5, valor: 115.59 }
-            ];
-            this.renderTable(mockData);
+            const data = await fetchApi(this.endpoint);
+            this.renderTable(data);
         } catch (error) {
             alert('Erro ao carregar abastecimentos: ' + error.message);
         }
@@ -139,13 +124,11 @@ class AbastecimentoController {
         const url = id ? `${this.endpoint}/${id}` : this.endpoint;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(url, method, payload);
-            console.log(`Simulando API -> ${method} ${url}`, payload);
+            await fetchApi(url, method, payload);
 
             this.resetForm();
             await this.loadData();
-            alert('Abastecimento salvo com sucesso! (Simulação)');
+            alert('Abastecimento salvo com sucesso!');
         } catch (error) {
             alert('Erro ao salvar abastecimento: ' + error.message);
         }
@@ -155,12 +138,10 @@ class AbastecimentoController {
         if (!confirm('Deseja realmente excluir este abastecimento?')) return;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
-            console.log(`Simulando API -> DELETE ${this.endpoint}/${id}`);
+            await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
 
             await this.loadData();
-            alert('Abastecimento excluído com sucesso! (Simulação)');
+            alert('Abastecimento excluído com sucesso!');
         } catch (error) {
             alert('Erro ao excluir abastecimento: ' + error.message);
         }

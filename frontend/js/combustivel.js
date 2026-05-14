@@ -28,15 +28,8 @@ class CombustivelController {
 
     async loadData() {
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // const data = await fetchApi(this.endpoint);
-
-            // Mock temporário para testar a tela
-            const mockData = [
-                { id: 1, nome: 'Gasolina Comum', preco: 5.89 },
-                { id: 2, nome: 'Etanol', preco: 3.79 }
-            ];
-            this.renderTable(mockData);
+            const data = await fetchApi(this.endpoint);
+            this.renderTable(data);
         } catch (error) {
             alert('Erro ao carregar combustíveis: ' + error.message);
         }
@@ -97,13 +90,11 @@ class CombustivelController {
         const url = id ? `${this.endpoint}/${id}` : this.endpoint;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(url, method, payload);
-            console.log(`Simulando API -> ${method} ${url}`, payload);
+            await fetchApi(url, method, payload);
 
             this.resetForm();
             await this.loadData();
-            alert('Salvo com sucesso! (Simulação)');
+            alert('Salvo com sucesso!');
         } catch (error) {
             alert('Erro ao salvar: ' + error.message);
         }
@@ -113,12 +104,10 @@ class CombustivelController {
         if (!confirm('Deseja realmente excluir este combustível?')) return;
 
         try {
-            // TODO: Descomentar quando a API estiver pronta
-            // await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
-            console.log(`Simulando API -> DELETE ${this.endpoint}/${id}`);
+            await fetchApi(`${this.endpoint}/${id}`, 'DELETE');
 
             await this.loadData();
-            alert('Excluído com sucesso! (Simulação)');
+            alert('Excluído com sucesso!');
         } catch (error) {
             alert('Erro ao excluir: ' + error.message);
         }
