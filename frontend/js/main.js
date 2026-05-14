@@ -51,10 +51,18 @@ async function renderBombas() {
     }
 }
 
-function renderAbastecimentos() {
+async function renderAbastecimentos() {
     const content = document.getElementById('app-content');
-    content.innerHTML = `
-        <h2>Gerenciar Abastecimentos</h2>
-        <p>Funcionalidade em desenvolvimento...</p>
-    `;
+
+    try {
+        const response = await fetch('pages/abastecimento/template.html');
+        const html = await response.text();
+        content.innerHTML = html;
+
+        if(window.abastecimentoController) {
+            window.abastecimentoController.init();
+        }
+    } catch(err) {
+        content.innerHTML = '<p>Erro ao carregar a página de abastecimentos.</p>';
+    }
 }

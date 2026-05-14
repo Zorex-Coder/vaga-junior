@@ -1,0 +1,57 @@
+<div class="abastecimento-container">
+    <h2>Gerenciar Abastecimentos</h2>
+
+    <div class="form-card">
+        <h3>Registrar Abastecimento</h3>
+        <form id="form-abastecimento">
+            <input type="hidden" id="abastecimento-id">
+
+            <div class="form-group">
+                <label for="bomba-abastecimento">Bomba utilizada:</label>
+                <select id="bomba-abastecimento" required>
+                    <option value="">Selecione uma bomba...</option>
+                    <!-- Preenchido via JS (Select de Bombas) -->
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="data-abastecimento">Data e Hora:</label>
+                <input type="datetime-local" id="data-abastecimento" required>
+            </div>
+
+            <div class="form-group">
+                <label for="litragem">Litragem (L):</label>
+                <input type="number" id="litragem" step="0.01" required placeholder="Ex: 20.5">
+            </div>
+
+            <div class="form-group">
+                <label for="valor-total">Valor Total (R$):</label>
+                <input type="number" id="valor-total" step="0.01" required placeholder="Ex: 110.50">
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" id="btn-cancelar-abastecimento" class="btn btn-secondary hidden">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="list-card">
+        <h3>Histórico de Abastecimentos</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Data</th>
+                    <th>Bomba</th>
+                    <th>Litros</th>
+                    <th>Valor (R$)</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista-abastecimentos">
+                <!-- Preenchido via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
