@@ -35,12 +35,20 @@ async function renderCombustiveis() {
     }
 }
 
-function renderBombas() {
+async function renderBombas() {
     const content = document.getElementById('app-content');
-    content.innerHTML = `
-        <h2>Gerenciar Bombas</h2>
-        <p>Funcionalidade em desenvolvimento...</p>
-    `;
+
+    try {
+        const response = await fetch('pages/bomba/template.html');
+        const html = await response.text();
+        content.innerHTML = html;
+
+        if(window.bombaController) {
+            window.bombaController.init();
+        }
+    } catch(err) {
+        content.innerHTML = '<p>Erro ao carregar a página de bombas.</p>';
+    }
 }
 
 function renderAbastecimentos() {

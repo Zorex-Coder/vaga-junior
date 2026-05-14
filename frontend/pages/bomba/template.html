@@ -1,0 +1,45 @@
+<div class="bomba-container">
+    <h2>Gerenciar Bombas de Combustível</h2>
+
+    <div class="form-card">
+        <h3>Cadastrar / Editar Bomba</h3>
+        <form id="form-bomba">
+            <input type="hidden" id="bomba-id">
+
+            <div class="form-group">
+                <label for="nome-bomba">Nome da Bomba:</label>
+                <input type="text" id="nome-bomba" required placeholder="Ex: Bomba 01">
+            </div>
+
+            <div class="form-group">
+                <label for="tipo-combustivel">Combustível que Abastece:</label>
+                <select id="tipo-combustivel" required>
+                    <option value="">Selecione um combustível...</option>
+                    <!-- Preenchido via JS (Select de Tipos de Combustivel) -->
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" id="btn-cancelar-bomba" class="btn btn-secondary hidden">Cancelar</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="list-card">
+        <h3>Bombas Cadastradas</h3>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome da Bomba</th>
+                    <th>Combustível</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="lista-bombas">
+                <!-- Preenchido via JS -->
+            </tbody>
+        </table>
+    </div>
+</div>
