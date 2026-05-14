@@ -1,10 +1,13 @@
 package com.merito.posto;
 
 import com.merito.posto.config.DatabaseConfig;
+import com.merito.posto.controller.AbastecimentoController;
 import com.merito.posto.controller.BombaController;
 import com.merito.posto.controller.CombustivelController;
+import com.merito.posto.repository.AbastecimentoRepository;
 import com.merito.posto.repository.BombaRepository;
 import com.merito.posto.repository.CombustivelRepository;
+import com.merito.posto.service.AbastecimentoService;
 import com.merito.posto.service.BombaService;
 import com.merito.posto.service.CombustivelService;
 import io.javalin.Javalin;
@@ -29,6 +32,10 @@ public class App {
         BombaService bombaService = new BombaService(bombaRepository);
         BombaController bombaController = new BombaController(bombaService);
 
+        AbastecimentoRepository abastecimentoRepository = new AbastecimentoRepository();
+        AbastecimentoService abastecimentoService = new AbastecimentoService(abastecimentoRepository, bombaRepository);
+        AbastecimentoController abastecimentoController = new AbastecimentoController(abastecimentoService);
+
         Javalin app = Javalin.create(config -> {
             // Habilita CORS para o nosso Frontend
             config.plugins.enableCors(cors -> {
@@ -51,6 +58,12 @@ public class App {
         app.post("/api/bombas", bombaController::criar);
         app.put("/api/bombas/{id}", bombaController::atualizar);
         app.delete("/api/bombas/{id}", bombaController::deletar);
+
+        // Rotas de Abastecimento
+        app.get("/api/abastecimentos", abastecimentoController::listar);
+        app.post("/api/abastecimentos", abastecimentoController::criar);
+        app.put("/api/abastecimentos/{id}", abastecimentoController::atualizar);
+        app.delete("/api/abastecimentos/{id}", abastecimentoController::deletar);
 
         log.info("API iniciada com sucesso na porta 8080.");
     }
