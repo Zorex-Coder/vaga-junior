@@ -1,5 +1,6 @@
 package com.merito.posto;
 
+import com.merito.posto.config.DatabaseConfig;
 import io.javalin.Javalin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +10,9 @@ public class App {
 
     public static void main(String[] args) {
         log.info("Iniciando a API do Posto de Combustível...");
+
+        // Inicializa o banco de dados e cria as tabelas
+        DatabaseConfig.init();
 
         Javalin app = Javalin.create(config -> {
             // Habilita CORS para o nosso Frontend
